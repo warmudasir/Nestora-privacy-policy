@@ -1,62 +1,158 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index,follow">
-    <title>Request Nestora Account Deletion</title>
-    <style>
-        body {
-            max-width: 760px;
-            margin: 40px auto;
-            padding: 0 20px;
-            color: #202735;
-            font: 16px/1.65 system-ui, sans-serif;
-        }
-
-        h1,
-        h2 {
-            line-height: 1.25;
-        }
-
-        a {
-            color: #4f46e5;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="description" content="Nestora brings property owners and tenants together for rooms, rent, bills, complaints, announcements, and community updates.">
+  <title>Nestora — Property Management Made Simple</title>
+  <style>
+    :root { --primary:#4f46e5; --primary-dark:#3730a3; --ink:#182033; --muted:#667085; --surface:#ffffff; --soft:#f4f6fb; --line:#e7eaf2; --green:#12a150; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--surface); font-family:Inter, ui-sans-serif, system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1120px, calc(100% - 40px)); margin-inline:auto; }
+    nav { height:76px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:22px; font-weight:850; letter-spacing:-.5px; }
+    .brand-mark { width:38px; height:38px; border-radius:12px; display:grid; place-items:center; color:white; background:linear-gradient(135deg, #4f46e5, #818cf8); box-shadow:0 8px 24px rgba(79,70,229,.25); }
+    .nav-links { display:flex; align-items:center; gap:24px; color:var(--muted); font-size:14px; font-weight:700; }
+    .nav-links a:hover { color:var(--primary); }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:48px; padding:12px 18px; border-radius:12px; border:1px solid transparent; font-weight:800; transition:.2s ease; }
+    .button-primary { color:white; background:var(--primary); box-shadow:0 12px 30px rgba(79,70,229,.22); }
+    .button-primary:hover { background:var(--primary-dark); transform:translateY(-2px); }
+    .button-secondary { color:var(--primary); background:#eef0ff; }
+    .hero { overflow:hidden; min-height:620px; display:flex; align-items:center; background:linear-gradient(180deg,#f8f9ff 0%,#ffffff 100%); border-bottom:1px solid var(--line); }
+    .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:60px; padding:70px 0 82px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--primary); background:#eef0ff; border-radius:999px; padding:8px 12px; font-size:13px; font-weight:800; }
+    h1 { margin:22px 0 18px; max-width:680px; font-size:clamp(46px,6vw,72px); line-height:.98; letter-spacing:-4px; }
+    .hero-copy { max-width:590px; color:var(--muted); font-size:19px; line-height:1.65; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+    .android-icon { width:23px; height:23px; display:grid; place-items:center; border:2px solid currentColor; border-radius:6px 6px 8px 8px; font-size:12px; }
+    .trust { display:flex; flex-wrap:wrap; gap:18px; margin-top:24px; color:var(--muted); font-size:13px; font-weight:700; }
+    .trust span::before { content:"✓"; margin-right:7px; color:var(--green); }
+    .phone-wrap { position:relative; min-height:500px; display:grid; place-items:center; }
+    .glow { position:absolute; width:390px; height:390px; border-radius:50%; background:rgba(129,140,248,.18); filter:blur(8px); }
+    .phone { position:relative; width:285px; height:520px; padding:10px; border:8px solid #202535; border-radius:38px; background:#202535; box-shadow:0 28px 70px rgba(24,32,51,.22); transform:rotate(3deg); }
+    .screen { height:100%; overflow:hidden; border-radius:23px; background:#f4f6fb; }
+    .app-head { display:flex; justify-content:space-between; align-items:center; padding:24px 18px 14px; background:white; }
+    .app-head strong { display:block; font-size:15px; }
+    .app-head small { color:var(--muted); }
+    .avatar { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; color:white; background:var(--primary); font-size:12px; }
+    .app-content { padding:12px; }
+    .summary { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .mini-card { min-height:82px; padding:12px; border-radius:12px; background:white; border:1px solid var(--line); }
+    .mini-card span { color:var(--muted); font-size:10px; }
+    .mini-card strong { display:block; margin-top:7px; font-size:20px; }
+    .room-card { height:210px; margin-top:9px; padding:13px; border-radius:13px; background:white; border:1px solid var(--line); }
+    .room-title { display:flex; justify-content:space-between; font-size:12px; font-weight:800; }
+    .beds { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:14px; }
+    .bed { height:72px; border-radius:10px; background:#eef0ff; padding:9px; }
+    .bed:nth-child(2), .bed:nth-child(3) { background:#e3f6ec; }
+    .bed i { display:block; width:20px; height:20px; border-radius:50%; background:white; margin-bottom:12px; }
+    .bed b { font-size:9px; color:var(--muted); }
+    section { padding:92px 0; }
+    .section-heading { max-width:650px; margin:0 auto 42px; text-align:center; }
+    .section-heading h2 { margin:12px 0 14px; font-size:clamp(34px,4vw,48px); letter-spacing:-2px; }
+    .section-heading p { color:var(--muted); line-height:1.7; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .feature { min-height:230px; padding:26px; border:1px solid var(--line); border-radius:20px; background:white; }
+    .feature-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:14px; background:#eef0ff; color:var(--primary); font-size:21px; }
+    .feature h3 { margin:22px 0 10px; font-size:19px; }
+    .feature p { margin:0; color:var(--muted); line-height:1.65; }
+    .roles { background:var(--soft); }
+    .role-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .role-card { padding:38px; border-radius:24px; background:white; border:1px solid var(--line); }
+    .role-card.owner { border-top:5px solid var(--primary); }
+    .role-card.tenant { border-top:5px solid var(--green); }
+    .role-card h3 { margin:0 0 18px; font-size:28px; }
+    .role-card ul { margin:0; padding:0; list-style:none; }
+    .role-card li { display:flex; gap:12px; padding:10px 0; color:var(--muted); }
+    .role-card li::before { content:"✓"; color:var(--green); font-weight:900; }
+    .cta { margin:70px 0; padding:52px; border-radius:28px; text-align:center; color:white; background:linear-gradient(135deg,var(--primary-dark),var(--primary)); }
+    .cta h2 { margin:0 0 12px; font-size:40px; letter-spacing:-1.5px; }
+    .cta p { margin:0 auto 24px; max-width:620px; color:#e7e9ff; }
+    .cta .button-primary { color:var(--primary); background:white; }
+    footer { border-top:1px solid var(--line); }
+    .footer-inner { min-height:100px; display:flex; align-items:center; justify-content:space-between; gap:20px; color:var(--muted); font-size:13px; }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a:hover { color:var(--primary); }
+    @media (max-width:850px) { .nav-links a:not(.button) { display:none; } .hero-grid { grid-template-columns:1fr; text-align:center; } h1,.hero-copy { margin-inline:auto; } .hero-actions,.trust { justify-content:center; } .phone-wrap { min-height:480px; } .features { grid-template-columns:1fr; } .feature { min-height:0; } .role-grid { grid-template-columns:1fr; } }
+    @media (max-width:520px) { .container { width:min(100% - 28px,1120px); } nav { height:68px; } .nav-links .button { min-height:42px; padding:9px 12px; } .hero-grid { gap:20px; padding:48px 0 58px; } h1 { font-size:46px; letter-spacing:-3px; } .hero-copy { font-size:16px; } .hero-actions .button { width:100%; } .phone { transform:scale(.92) rotate(2deg); } .phone-wrap { min-height:480px; } section { padding:68px 0; } .role-card { padding:26px; } .cta { margin:48px 0; padding:38px 20px; } .cta h2 { font-size:32px; } .footer-inner { flex-direction:column; justify-content:center; text-align:center; padding:24px 0; } }
+  </style>
 </head>
-
 <body>
-    <h1>Request Nestora Account Deletion</h1>
-    <p>M Mudasir operates Nestora from 10th Cross Dodenakuddi, Whitefield, Bangalore, India.</p>
+  <header class="container">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Nestora home"><span class="brand-mark">N</span><span>Nestora</span></a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#roles">For who</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="delete-account.html">Account deletion</a>
+        <a class="button button-primary" href="https://play.google.com/store/apps/details?id=com.saabu.nestora"><span class="android-icon">▶</span> Get for Android</a>
+      </div>
+    </nav>
+  </header>
 
-    <h2>Request deletion from inside the app</h2>
-    <p>If you can sign in to Nestora, open <strong>Account &amp; Privacy</strong>, choose <strong>Request account
-            deletion</strong>, and confirm. This records a deletion request for review. It does not immediately erase your
-        account or shared property records.</p>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">● Property management, simplified</span>
+          <h1>Everything for your property, in one place.</h1>
+          <p class="hero-copy">Manage rooms, tenants, rent, bills, complaints, announcements, and community updates without scattered spreadsheets or repeated calls.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://play.google.com/store/apps/details?id=com.saabu.nestora"><span class="android-icon">▶</span> Download for Android</a>
+            <a class="button button-secondary" href="#features">Explore features</a>
+          </div>
+          <div class="trust"><span>Owner &amp; tenant accounts</span><span>Real-time updates</span><span>Secure Supabase access</span></div>
+        </div>
 
-    <h2>Request deletion without signing in</h2>
-    <p>If you cannot access your account or no longer have the app, email <a
-            href="mailto:support@mynestora.in?subject=Nestora%20account%20deletion%20request"><strong>support@mynestora.in</strong></a>
-        from the email address registered to your Nestora account. Use the subject <strong>Nestora account deletion
-            request</strong>.</p>
-    <p>Do not send your password, verification codes, payment credentials, or sensitive identity documents. We may ask
-        for limited information needed to verify that you control the account.</p>
+        <div class="phone-wrap" aria-hidden="true">
+          <div class="glow"></div>
+          <div class="phone">
+            <div class="screen">
+              <div class="app-head"><div><strong>Good morning</strong><small>Sunrise PG</small></div><div class="avatar">O</div></div>
+              <div class="app-content">
+                <div class="summary"><div class="mini-card"><span>Occupancy</span><strong>86%</strong></div><div class="mini-card"><span>Rent due</span><strong>₹12K</strong></div></div>
+                <div class="room-card"><div class="room-title"><span>Rooms &amp; beds</span><span>4 rooms</span></div><div class="beds"><div class="bed"><i></i><b>Room 101 · Bed 1</b></div><div class="bed"><i></i><b>Room 101 · Bed 2</b></div><div class="bed"><i></i><b>Room 102 · Bed 1</b></div><div class="bed"><i></i><b>Room 102 · Bed 2</b></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <h2>What happens next</h2>
-    <p>We will verify the request, review the account and its linked data, and contact you if we need more information.
-        Owner accounts may be linked to tenant accounts and shared property, rent, bill, complaint, and tenancy records.
-        Shared records may be retained or transferred where needed for ongoing property administration or applicable
-        recordkeeping.</p>
-    <p>We aim to complete approved requests within 45 days. If an applicable law or security, fraud, dispute, or
-        recordkeeping requirement requires us to retain information, we will retain only the information needed and
-        delete or de-identify it when the requirement no longer applies.</p>
+    <section id="features">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">Built for everyday operations</span><h2>One app. Every essential task.</h2><p>Give owners a clear overview and give tenants an easy way to stay updated and take action.</p></div>
+        <div class="features">
+          <article class="feature"><div class="feature-icon">⌂</div><h3>Rooms &amp; tenants</h3><p>Organize properties, rooms, beds, active assignments, and tenant details from a single dashboard.</p></article>
+          <article class="feature"><div class="feature-icon">₹</div><h3>Rent collection</h3><p>Track monthly rent, review payment proofs, approve payments, and keep both owner and tenant records current.</p></article>
+          <article class="feature"><div class="feature-icon">⚡</div><h3>Bills &amp; dues</h3><p>Create room bills, split charges, and let occupants quickly see what is paid or pending.</p></article>
+          <article class="feature"><div class="feature-icon">✉</div><h3>Complaints</h3><p>Submit, review, track, and resolve property issues without losing the conversation or status.</p></article>
+          <article class="feature"><div class="feature-icon">◎</div><h3>Announcements</h3><p>Publish important property updates and keep all assigned tenants informed in one place.</p></article>
+          <article class="feature"><div class="feature-icon">◉</div><h3>Community chat</h3><p>Help active tenants communicate through a property community while keeping the owner notified.</p></article>
+        </div>
+      </div>
+    </section>
 
-    <h2>Contact</h2>
-    <p>M Mudasir<br>10th Cross Dodenakuddi, Whitefield, Bangalore, India<br><a
-            href="mailto:support@mynestora.in">support@mynestora.in</a></p>
+    <section class="roles" id="roles">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">A simpler experience for both sides</span><h2>Made for owners and tenants</h2></div>
+        <div class="role-grid">
+          <article class="role-card owner"><h3>For owners</h3><ul><li>Manage properties, rooms, beds, and active tenants</li><li>Track monthly rent and payment approvals</li><li>Create bills and update complaint status</li><li>Invite tenants and publish announcements</li></ul></article>
+          <article class="role-card tenant"><h3>For tenants</h3><ul><li>View assigned room, rent, and bills</li><li>Submit rent-payment screenshots</li><li>Create complaints and track their status</li><li>Read announcements and join community chat</li></ul></article>
+        </div>
+      </div>
+    </section>
 
-    <p><a href="privacy-policy.html">Read the Nestora Privacy Policy</a></p>
+    <div class="container"><section class="cta"><h2>Bring your property operations together.</h2><p>Get Nestora on Android and manage your property details, tenants, rent, bills, and updates from one mobile app.</p><a class="button button-primary" href="https://play.google.com/store/apps/details?id=com.saabu.nestora"><span class="android-icon">▶</span> Get it on Google Play</a></section></div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner"><div>© 2026 Nestora · M Mudasir</div><div class="footer-links"><a href="privacy-policy.html">Privacy policy</a><a href="delete-account.html">Account deletion</a><a href="mailto:support@mynestora.in">Support</a></div></div>
+  </footer>
 </body>
-
 </html>
